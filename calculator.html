@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+button {margin: .25em;
+cursor: pointer;
+}
+
+.ultcontainer {width: 500px;
+border-radius: 10px 10px 10px 10px;
+background-color: #597368;
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+grid-template-rows: 3em 3em;
+grid-auto-rows: 2em;
+}
+
+.screenone {background-color: #7CCD7C;
+opacity: 0.5;
+border-radius: 10px 10px 0 0;
+text-align: left;
+text-indent: 0.5em;
+font-size: 2em;
+font-weight: bold;
+grid-area: 1/1/2/6;
+}
+
+.screentwo {background-color: #7CCD7C;
+opacity: 0.5;
+text-align: right;
+text-indent: 0.5em;
+font-size: 2em;
+font-weight: bold;
+grid-area: 2/1/3/6;
+}
+
+.delete {
+grid-area: 3/4/4/5;
+}
+.clearall {
+grid-area: 3/5/4/6;
+}
+.equal {
+grid-column: 4/span 2;
+}
+#multiply {
+grid-area: 4/4/5/5;
+}
+#divide {
+grid-area: 4/5/5/6;
+}
+#plus {
+grid-area: 5/4/6/5;
+}
+#minus {
+grid-area: 5/5/6/6;
+}
+#zero {
+grid-column: 1/span 2;
+}
+
+</style>
+</head>
+<body>
+<center>
+<div class = "ultcontainer">
+<div class = "screenone"></div>
+<div class = "screentwo"></div>
+<button id = "one" class = "onscreen" data-num = "1">1</button>
+<button id = "two" class = "onscreen" data-num = "2">2</button>
+<button id = "three" class = "onscreen" data-num = "3">3</button>
+<button id = "four" class = "onscreen" data-num = "4">4</button>
+<button id = "five" class = "onscreen" data-num = "5">5</button>
+<button id = "six" class = "onscreen" data-num = "6">6</button>
+<button id = "seven" class = "onscreen" data-num = "7">7</button>
+<button id = "eight" class = "onscreen" data-num = "8">8</button>
+<button id = "nine" class = "onscreen" data-num = "9">9</button>
+<button id = "zero" class = "onscreen" data-num = "0">0</button>
+<button id = "point" class = "onscreen" data-num = ".">.</button>
+<button id = "plus" class = "onscreen" data-num = "+">+</button>
+<button id = "minus" class = "onscreen" data-num = "-">-</button>
+<button id = "divide" class = "onscreen" data-num = "/">/</button>
+<button id = "multiply" class = "onscreen" data-num = "*">X</button>
+<button class = "equal" >=</button>
+<button class = "delete" >DEL</button>
+<button class = "clearall" >AC</button>
+</div>
+</center>
+<script>
+const topscreen = document.querySelector('.screenone');
+const bottomscreen = document.querySelector('.screentwo');
+const buttons = document.querySelectorAll('.onscreen');
+const equalsign = document.querySelector ('.equal');
+const del = document.querySelector ('.delete');
+const clrall = document.querySelector ('.clearall');
+
+buttons.forEach (onscreen => {
+onscreen.addEventListener('click', ()=>{
+let content = onscreen.getAttribute('data-num');
+topscreen.textContent += content;
+})
+})
+
+equalsign.addEventListener('click', () => {
+let problem = topscreen.textContent;
+topscreen.textContent = eval(problem);
+bottomscreen.textContent = eval(problem);
+})
+
+del.addEventListener('click', ()=>{
+let line = topscreen.textContent;
+topscreen.textContent = line.slice(0, -1);
+})
+
+clrall.addEventListener('click', clear);
+function clear () {
+topscreen.textContent = '';
+bottomscreen.textContent = '0';
+}
+
+
+</script>
+</body>
+</html>
